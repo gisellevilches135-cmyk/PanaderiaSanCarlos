@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panadería Digital Antofagasta | Portal de Transformación Marketing 5.0</title>
+    <style>
+        /* 
+        PASO 2: DISEÑO UI/UX - ESTILO MINIMALISTA Y MODERNO
+        Se utiliza una paleta de colores tierra (panadería) con un enfoque limpio para reducir la carga cognitiva,
+        facilitando la adopción tecnológica del personal (Marketing 5.0: Human-Centric Technology).
+        */
+        :root {
+            --primary: #8d6e63;
+            --primary-dark: #5f4339;
+            --accent: #d4a373;
+            --bg: #fafafa;
+            --text: #2d3436;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0,0,0,0.05);
+            --radius: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+
+        body { background-color: var(--bg); color: var(--text); line-height: 1.6; }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+
+        header { 
+            background: var(--white); 
+            padding: 2rem; 
+            border-radius: var(--radius); 
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            border-left: 5px solid var(--primary);
+        }
+
+        h1 { font-weight: 300; color: var(--primary-dark); font-size: 1.8rem; }
+        p.subtitle { color: #7f8c8d; font-size: 0.9rem; }
+
+        /* Navegación por Tabs */
+        .tabs { display: flex; gap: 10px; margin-bottom: 20px; overflow-x: auto; padding-bottom: 5px; }
+        .tab-btn { 
+            padding: 10px 20px; border: none; background: #eee; border-radius: 20px; 
+            cursor: pointer; transition: 0.3s; white-space: nowrap; font-weight: 500;
+        }
+        .tab-btn.active { background: var(--primary); color: white; }
+
+        /* Secciones */
+        .view { display: none; animation: fadeIn 0.4s ease; }
+        .view.active { display: block; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Grid de Gestión */
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
+
+        .card { 
+            background: var(--white); padding: 20px; border-radius: var(--radius); 
+            box-shadow: var(--shadow); border: 1px solid #f0f0f0;
+        }
+
+        /* Formulario */
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-size: 0.85rem; font-weight: 600; }
+        input, select { 
+            width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; 
+            outline: none; transition: border 0.3s;
+        }
+        input:focus { border-color: var(--primary); }
+
+        .btn { 
+            background: var(--primary); color: white; border: none; padding: 12px 20px; 
+            border-radius: 8px; cursor: pointer; width: 100%; font-weight: 600;
+        }
+        .btn:hover { background: var(--primary-dark); }
+
+        /* Lista de Pedidos */
+        .order-item { 
+            padding: 15px; border-bottom: 1px solid #eee; display: flex; 
+            justify-content: space-between; align-items: center;
+        }
+        .status-badge { 
+            padding: 4px 10px; border-radius: 15px; font-size: 0.75rem; font-weight: bold;
+        }
+        .status-pending { background: #ffeaa7; color: #d35400; }
+        .status-ready { background: #55efc4; color: #00b894; }
+
+        /* Dashboard Analytics */
+        .stat-card { text-align: center; padding: 20px; }
+        .stat-value { font-size: 2rem; font-weight: bold; color: var(--primary); }
+        .stat-label { font-size: 0.8rem; color: #636e72; text-transform: uppercase; }
+
+        /* Maturity Quiz */
+        .quiz-item { margin-bottom: 20px; padding: 15px; background: #f9f9f9; border-radius: 8px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Panadería Tradicional Antofagasta</h1>
+        <p class="subtitle">Sistema de Gestión Digital Híbrido | Marketing 5.0 Framework</p>
+    </header>
+
+    <nav class="tabs">
+        <button class="tab-btn active" onclick="showView('pedidos')">Gestión de Pedidos</button>
+        <button class="tab-btn" onclick="showView('clientes')">Base de Clientes</button>
+        <button class="tab-btn" onclick="showView('analitica')">Analítica de Datos</button>
+        <button class="tab-btn" onclick="showView('madurez')">Madurez Digital</button>
+    </nav>
+
+    <!-- VISTA PEDIDOS: Implementa "Agile Marketing" -->
+    <section id="pedidos" class="view active">
+        <div class="grid">
+            <div class="card">
+                <h3>Nuevo Pedido</h3>
+                <p style="font-size: 0.8rem; margin-bottom: 15px;">Digitalización del punto de venta presencial.</p>
+                <div class="form-group">
+                    <label>Cliente</label>
+                    <input type="text" id="order-client" placeholder="Nombre del cliente">
+                </div>
+                <div class="form-group">
+                    <label>Producto</label>
+                    <select id="order-product">
+                        <option value="Pan Marraqueta">Pan Marraqueta (Kg)</option>
+                        <option value="Pan Hallulla">Pan Hallulla (Kg)</option>
+                        <option value="Empanada de Pino">Empanada de Pino</option>
+                        <option value="Pastel de Choclo">Pastel de Choclo</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Cantidad</label>
+                    <input type="number" id="order-qty" value="1">
+                </div>
+                <button class="btn" onclick="addOrder()">Registrar Pedido</button>
+            </div>
+            <div class="card">
+                <h3>Pedidos en Tiempo Real</h3>
+                <div id="order-list">
+                    <!-- Dinámico -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VISTA CLIENTES: Implementa "Contextual Marketing" -->
+    <section id="clientes" class="view">
+        <div class="card">
+            <h3>CRM Básico (Gestión de Relaciones)</h3>
+            <p style="font-size: 0.8rem; margin-bottom: 15px;">Conocer al cliente para personalizar la oferta (Marketing 5.0).</p>
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="text-align: left; border-bottom: 2px solid #eee;">
+                        <th style="padding: 10px;">Nombre</th>
+                        <th>Frecuencia</th>
+                        <th>Última Compra</th>
+                    </tr>
+                </thead>
+                <tbody id="customer-list">
+                    <!-- Dinámico -->
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- VISTA ANALÍTICA: Implementa "Data-Driven Marketing" -->
+    <section id="analitica" class="view">
+        <div class="grid">
+            <div class="card stat-card">
+                <div class="stat-label">Ventas Totales Hoy</div>
+                <div class="stat-value" id="stat-total">$0</div>
+            </div>
+            <div class="card stat-card">
+                <div class="stat-label">Pedidos Completados</div>
+                <div class="stat-value" id="stat-count">0</div>
+            </div>
+        </div>
+        <div class="card" style="margin-top: 20px;">
+            <h3>Rendimiento Operativo</h3>
+            <p>Visualización de datos para la toma de decisiones estratégicas.</p>
+            <div id="chart-placeholder" style="height: 150px; display: flex; align-items: flex-end; gap: 10px; padding-top: 20px;">
+                <!-- Barras de gráfico simples con CSS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- VISTA MADUREZ: Aborda la "Resistencia al Cambio" -->
+    <section id="madurez" class="view">
+        <div class="card">
+            <h3>Evaluación de Transformación Digital</h3>
+            <p style="margin-bottom: 20px;">Mide el progreso de la panadería según los pilares de Kotler.</p>
+            <div id="quiz-container">
+                <div class="quiz-item">
+                    <label>1. ¿El personal utiliza herramientas digitales para registrar ventas?</label>
+                    <input type="range" min="0" max="100" value="20" class="slider" id="q1">
+                </div>
+                <div class="quiz-item">
+                    <label>2. ¿Existe comunicación activa por canales digitales (WhatsApp/RRSS)?</label>
+                    <input type="range" min="0" max="100" value="10" class="slider" id="q2">
+                </div>
+                <button class="btn" onclick="calculateMaturity()">Calcular Índice de Madurez</button>
+            </div>
+            <div id="maturity-result" style="margin-top: 20px; font-weight: bold; text-align: center;"></div>
+        </div>
+    </section>
+</div>
+
+<script>
+    /* 
+    PASO 1: RAZONAMIENTO ANALÍTICO (Basado en Kotler et al., 2021)
+    La brecha digital en la panadería se mitiga aplicando el Marketing 5.0:
+    1. Next-Tech: Implementación de una interfaz digital simple que no intimide al personal tradicional.
+    2. Data-Driven: Pasar de la intuición a datos reales de ventas para optimizar stock.
+    3. Agile Marketing: Capacidad de respuesta rápida ante pedidos digitales y presenciales.
+    4. Humanity: La tecnología asiste al panadero, no lo reemplaza, manteniendo la esencia artesanal.
+    */
+
+    // ESTADO DE LA APLICACIÓN
+    let orders = [
+        { id: 1, client: "Juan Pérez", product: "Pan Marraqueta", qty: 2, status: "ready", price: 4000 },
+        { id: 2, client: "María Soto", product: "Empanada de Pino", qty: 4, status: "pending", price: 8000 }
+    ];
+
+    // PASO 3: DESARROLLO DE LA LÓGICA
+    function showView(viewId) {
+        document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(viewId).classList.add('active');
+        event.currentTarget.classList.add('active');
+        
+        if(viewId === 'analitica') renderStats();
+        if(viewId === 'clientes') renderCustomers();
+    }
+
+    /**
+     * MARKETING 5.0: AGILE MARKETING
+     * Esta función permite una gestión dinámica de pedidos, reduciendo tiempos de espera
+     * y mejorando la eficiencia operativa (Pilar de Agilidad).
+     */
+    function addOrder() {
+        const client = document.getElementById('order-client').value;
+        const product = document.getElementById('order-product').value;
+        const qty = document.getElementById('order-qty').value;
+
+        if(!client) return alert("Ingrese nombre del cliente");
+
+        const newOrder = {
+            id: Date.now(),
+            client,
+            product,
+            qty,
+            status: 'pending',
+            price: qty * 1500 // Precio ficticio
+        };
+
+        orders.push(newOrder);
+        renderOrders();
+        // Limpiar campos
+        document.getElementById('order-client').value = '';
+    }
+
+    function toggleStatus(id) {
+        orders = orders.map(o => o.id === id ? {...o, status: o.status === 'pending' ? 'ready' : 'pending'} : o);
+        renderOrders();
+    }
+
+    function renderOrders() {
+        const list = document.getElementById('order-list');
+        list.innerHTML = orders.map(o => `
+            <div class="order-item">
+                <div>
+                    <strong>${o.client}</strong><br>
+                    <small>${o.qty}x ${o.product}</small>
+                </div>
+                <span class="status-badge ${o.status === 'ready' ? 'status-ready' : 'status-pending'}" 
+                      onclick="toggleStatus(${o.id})" style="cursor:pointer">
+                    ${o.status === 'ready' ? 'LISTO' : 'PENDIENTE'}
+                </span>
+            </div>
+        `).join('');
+    }
+
+    /**
+     * MARKETING 5.0: DATA-DRIVEN MARKETING
+     * Transforma transacciones simples en datos visualizables para que el dueño de la 
+     * panadería comprenda el comportamiento de su negocio.
+     */
+    function renderStats() {
+        const total = orders.reduce((acc, curr) => acc + curr.price, 0);
+        const count = orders.filter(o => o.status === 'ready').length;
+        
+        document.getElementById('stat-total').innerText = `$${total.toLocaleString()}`;
+        document.getElementById('stat-count').innerText = count;
+
+        // Gráfico simple con CSS
+        const chart = document.getElementById('chart-placeholder');
+        const maxPrice = Math.max(...orders.map(o => o.price), 1);
+        chart.innerHTML = orders.map(o => `
+            <div style="flex:1; background:var(--accent); height:${(o.price/maxPrice)*100}%; border-radius:4px 4px 0 0; position:relative;" title="${o.product}">
+                <span style="font-size:0.6rem; position:absolute; top:-15px; width:100%; text-align:center;">$${o.price}</span>
+            </div>
+        `).join('');
+    }
+
+    function renderCustomers() {
+        const list = document.getElementById('customer-list');
+        // Simulación de CRM basada en los pedidos actuales
+        const uniqueClients = [...new Set(orders.map(o => o.client))];
+        list.innerHTML = uniqueClients.map(c => `
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">${c}</td>
+                <td>${orders.filter(o => o.client === c).length} compras</td>
+                <td>Hoy</td>
+            </tr>
+        `).join('');
+    }
+
+    /**
+     * MARKETING 5.0: TECHNOLOGY FOR HUMANITY
+     * Esta sección aborda directamente la "Resistencia al Cambio" permitiendo al usuario
+     * autoevaluar su progreso, convirtiendo la transformación en un proceso lúdico y medible.
+     */
+    function calculateMaturity() {
+        const q1 = parseInt(document.getElementById('q1').value);
+        const q2 = parseInt(document.getElementById('q2').value);
+        const avg = (q1 + q2) / 2;
+        
+        let msg = "";
+        if(avg < 30) msg = "Nivel: Tradicional. Foco en digitalizar el registro de ventas.";
+        else if(avg < 70) msg = "Nivel: En Transición. Buen avance en la adopción de herramientas.";
+        else msg = "Nivel: Panadería 5.0. ¡Excelente integración tecnológica!";
+
+        document.getElementById('maturity-result').innerHTML = `
+            <div style="color: var(--primary-dark)">${avg}% de Madurez Digital</div>
+            <div style="font-weight:normal; font-size:0.9rem; margin-top:5px;">${msg}</div>
+        `;
+    }
